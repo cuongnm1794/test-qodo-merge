@@ -45,4 +45,4 @@ def get_user_info(user_id):
     # Bad: directly accessing without status code check
     return response.json()
 
- asdasd asdas
+ asdasd asdasd
