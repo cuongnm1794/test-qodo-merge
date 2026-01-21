@@ -1,27 +1,20 @@
-name: Qodo Merge PR Review
-
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
-
+    types: [opened, reopened, ready_for_review]
+  issue_comment:
 jobs:
-  pr-review:
+  pr_agent_job:
+    if: ${{ github.event.sender.type != 'Bot' }}
     runs-on: ubuntu-latest
     permissions:
+      issues: write
       pull-requests: write
-      contents: read
-
+      contents: write
+    name: Run pr agent on every pull request, respond to user comments
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run Qodo Merge Review
-        uses: qodo-ai/pr-agent@latest
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_key: ${{ secrets.OPENAI_KEY }}
-          openai_model: "gpt-4"
-          pr_description: "auto"
-          pr_review_prompt: "auto"
-          pr_code_suggestions: "auto"
-          pr_compiler_warnings: "auto"
+      - name: PR Agent action step
+        id: pragent
+        uses: qodo-ai/pr-agent@main
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
