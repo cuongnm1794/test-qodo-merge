@@ -1,0 +1,16 @@
+name: Qodo Merge PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Qodo Merge
+        uses: qodo-ai/pr-agent@v0.14.0
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
