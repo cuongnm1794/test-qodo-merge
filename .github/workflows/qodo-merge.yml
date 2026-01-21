@@ -5,12 +5,23 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  pr-agent:
+  pr-review:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
 
     steps:
-      - name: Run Qodo Merge
-        uses: qodo-ai/pr-agent@v0.14.0
-        env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Qodo Merge Review
+        uses: qodo-ai/pr-agent@latest
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          openai_key: ${{ secrets.OPENAI_KEY }}
+          openai_model: "gpt-4"
+          pr_description: "auto"
+          pr_review_prompt: "auto"
+          pr_code_suggestions: "auto"
+          pr_compiler_warnings: "auto"

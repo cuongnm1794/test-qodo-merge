@@ -1,0 +1,31 @@
+[config]
+# Qodo PR-Agent Configuration
+
+# Model configurations
+[config.openai]
+model = "gpt-4"
+temperature = 0.2
+
+# PR Agent settings
+[config.pr_agent]
+# Auto-description of PR
+publish_description = true
+description_template = "default"
+
+# Auto-review of PR
+publish_review = true
+review_comment_every_section = true
+max_review_comments = 10
+
+# Auto-suggestions
+publish_code_suggestions = true
+max_code_suggestions = 5
+code_suggestions_per_section = 3
+
+# General settings
+inline_comments = true
+final_update_message = true
+
+[config.github]
+# Number of retries for GitHub API calls
+max_retries = 3
