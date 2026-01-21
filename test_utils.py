@@ -51,3 +51,6 @@ class TestProcessUserData:
         assert result['name'] == 'JOHN DOE'
         assert result['age'] == 30
         assert result['email'] == 'john@example.com'
+
+if __name__ == "__main__":
+    pytest.main()
