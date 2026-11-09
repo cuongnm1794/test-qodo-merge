@@ -1,9 +1,7 @@
 on:
-  push:
-    branches: [ "main" ]  # Kích hoạt workflow khi có push vào nhánh main
-  pull_request:
+   pull_request:
     types: [opened, reopened, ready_for_review, synchronize]
-  issue_comment:
+   issue_comment:
     types: [created]
 jobs:
   pr_agent_job:
